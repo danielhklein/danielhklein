@@ -26,7 +26,7 @@ def lambda_handler(event, context):
             Message='Site Deployed Successfully'
         )
     except:
-        topic.pusblish(
+        topic.publish(
             Subject='Personal Site Deploy Failed',
             Message='Site Deployment Failed'
         )
