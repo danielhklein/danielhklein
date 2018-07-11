@@ -16,5 +16,13 @@ def lambda_handler(event, context):
             obj = myzip.open(nm)
             site_bucket.upload_fileobj(obj, nm)
             site_bucket.Object(nm).Acl().put(ACL='public-read')
+            
+    sns = boto3.resource('sns')
+    topic_arn = 'arn:aws:sns:us-east-1:654016828638:deployPersonalWebsiteTopic'
+    topic = sns.Topic(topic_arn)
+    topic.publish(
+        Subject='Personal Site Deployed', 
+        Message='Site Deployed Successfully'
+    )
     
     return
